@@ -1,0 +1,66 @@
+---
+import "../../styles/global.css";
+
+const title = "Async Event Pipeline (SNS -> SQS)";
+const github = "https://github.com/clorenz-git/REPO_NAME"; // change me
+---
+
+<html lang="en">
+  <body class="bg-lines">
+    <main class="container" style="padding:42px 0 80px;">
+      <a class="pill" href="/" style="margin-bottom:16px;"><- Back</a>
+
+      <section class="card" style="padding:24px;">
+        <h1 style="margin-bottom:10px;">{title}</h1>
+        <p>
+          A decoupled workflow designed to handle spikes without melting downstream services.
+          Uses retries + DLQ patterns for resiliency.
+        </p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+          <span class="pill">AWS</span>
+          <span class="pill">SNS</span>
+          <span class="pill">SQS</span>
+          <span class="pill">DLQ</span>
+          <span class="pill">Python</span>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+          <a class="btn primary" href={github} target="_blank" rel="noreferrer">View code on GitHub</a>
+          <a class="btn" href="#architecture">Architecture</a>
+          <a class="btn" href="#decisions">Decisions</a>
+          <a class="btn" href="#results">Results</a>
+        </div>
+      </section>
+
+      <section id="architecture" class="card" style="padding:22px; margin-top:16px;">
+        <h2 style="margin-bottom:10px;">Architecture</h2>
+        <p>
+          Producer publishes events to SNS. SQS subscribes. Workers process messages with retries.
+          Failed messages go to a DLQ for inspection/replay.
+        </p>
+        <div class="pill" style="margin-top:10px;">
+          Tip: later we can add a diagram image here (PNG/SVG) in /public
+        </div>
+      </section>
+
+      <section id="decisions" class="card" style="padding:22px; margin-top:16px;">
+        <h2 style="margin-bottom:10px;">Key decisions</h2>
+        <ul style="color:var(--muted); line-height:1.7; margin:0; padding-left:18px;">
+          <li>Used DLQ to prevent poison messages from blocking the queue.</li>
+          <li>Designed for retries and idempotent handlers.</li>
+          <li>Separated publish and processing for loose coupling.</li>
+        </ul>
+      </section>
+
+      <section id="results" class="card" style="padding:22px; margin-top:16px;">
+        <h2 style="margin-bottom:10px;">Results</h2>
+        <ul style="color:var(--muted); line-height:1.7; margin:0; padding-left:18px;">
+          <li>Handles burst traffic without dropping requests.</li>
+          <li>Operationally debuggable with DLQ inspection.</li>
+          <li>Easy to extend with additional subscribers.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

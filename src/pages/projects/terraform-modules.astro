@@ -1,0 +1,68 @@
+---
+import "../../styles/global.css";
+
+const title = "Terraform Modular Infrastructure";
+const github = "https://github.com/clorenz-git/REPO_NAME"; // optional
+---
+
+<html lang="en">
+  <body class="bg-lines">
+    <main class="container" style="padding:42px 0 80px;">
+      <a class="pill" href="/" style="margin-bottom:16px;"><- Back</a>
+
+      <section class="card" style="padding:24px;">
+        <h1>{title}</h1>
+        <p>
+          A reusable Terraform module pattern designed to provision infrastructure
+          consistently across environments while keeping configuration clean and scalable.
+        </p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+          <span class="pill">Terraform</span>
+          <span class="pill">AWS</span>
+          <span class="pill">IaC</span>
+          <span class="pill">Modular Design</span>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+          <a class="btn primary" href={github} target="_blank" rel="noreferrer">View code on GitHub</a>
+        </div>
+      </section>
+
+      <section class="card" style="padding:22px; margin-top:16px;">
+        <h2>Problem</h2>
+        <p>
+          Managing infrastructure directly in large Terraform files becomes difficult to
+          maintain, reuse, and reason about as environments grow.
+        </p>
+      </section>
+
+      <section class="card" style="padding:22px; margin-top:16px;">
+        <h2>Approach</h2>
+        <ul style="color:var(--muted); line-height:1.7;">
+          <li>Split infrastructure into logical modules (compute, networking, security).</li>
+          <li>Expose only required inputs and outputs.</li>
+          <li>Keep modules environment-agnostic.</li>
+        </ul>
+      </section>
+
+      <section class="card" style="padding:22px; margin-top:16px;">
+        <h2>Key Decisions</h2>
+        <ul style="color:var(--muted); line-height:1.7;">
+          <li>Use variables and outputs instead of hardcoded values.</li>
+          <li>Favor readability over clever abstractions.</li>
+          <li>Design modules to scale from small labs to larger deployments.</li>
+        </ul>
+      </section>
+
+      <section class="card" style="padding:22px; margin-top:16px;">
+        <h2>Results</h2>
+        <ul style="color:var(--muted); line-height:1.7;">
+          <li>Cleaner Terraform plans and applies.</li>
+          <li>Faster iteration when adding or modifying infrastructure.</li>
+          <li>Reusable patterns across multiple projects.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

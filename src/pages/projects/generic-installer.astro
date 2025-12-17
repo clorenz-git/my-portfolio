@@ -1,0 +1,69 @@
+---
+import "../../styles/global.css";
+
+const title = "Generic Installer Automation";
+const github = "https://github.com/clorenz-git/REPO_NAME"; // optional
+---
+
+<html lang="en">
+  <body class="bg-lines">
+    <main class="container" style="padding:42px 0 80px;">
+      <a class="pill" href="/" style="margin-bottom:16px;"><- Back</a>
+
+      <section class="card" style="padding:24px;">
+        <h1>{title}</h1>
+        <p>
+          A generalized installer automation framework designed to reduce manual setup,
+          ensure consistency, and improve reliability during software deployments.
+        </p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+          <span class="pill">Python</span>
+          <span class="pill">Automation</span>
+          <span class="pill">Windows</span>
+          <span class="pill">Installers</span>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+          <a class="btn primary" href={github} target="_blank" rel="noreferrer">View code on GitHub</a>
+        </div>
+      </section>
+
+      <section class="card" style="padding:22px; margin-top:16px;">
+        <h2>Problem</h2>
+        <p>
+          Manual installation processes are error-prone, time-consuming, and difficult to
+          standardize across machines and environments.
+        </p>
+      </section>
+
+      <section class="card" style="padding:22px; margin-top:16px;">
+        <h2>Approach</h2>
+        <ul style="color:var(--muted); line-height:1.7;">
+          <li>Automate file extraction and placement.</li>
+          <li>Inject configuration values programmatically.</li>
+          <li>Install and manage background services.</li>
+          <li>Provide clear logging and status feedback.</li>
+        </ul>
+      </section>
+
+      <section class="card" style="padding:22px; margin-top:16px;">
+        <h2>Key Decisions</h2>
+        <ul style="color:var(--muted); line-height:1.7;">
+          <li>Favor idempotent operations where possible.</li>
+          <li>Fail fast with clear error messages.</li>
+          <li>Keep the installer adaptable to different applications.</li>
+        </ul>
+      </section>
+
+      <section class="card" style="padding:22px; margin-top:16px;">
+        <h2>Results</h2>
+        <ul style="color:var(--muted); line-height:1.7;">
+          <li>Reduced setup time from minutes to seconds.</li>
+          <li>More consistent installs across systems.</li>
+          <li>Easier troubleshooting through logs.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
