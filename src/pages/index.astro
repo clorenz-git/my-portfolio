@@ -1,0 +1,153 @@
+---
+import "../styles/global.css";
+
+const projects = [
+  {
+    title: "Async Event Pipeline (SNS -> SQS)",
+    desc: "Decoupled workflow with retries + DLQ. Built for resiliency and burst traffic.",
+    tags: ["AWS", "SNS", "SQS", "Python"],
+    link: "#"
+  },
+  {
+    title: "Terraform Modular Infra",
+    desc: "Reusable modules for EC2 + SG + EIP with clean outputs and consistent patterns.",
+    tags: ["Terraform", "AWS", "IaC"],
+    link: "#"
+  },
+  {
+    title: "Installer Automation",
+    desc: "Packaged installer automation (Python) with file extraction, config injection, service install, and launch.",
+    tags: ["Python", "Windows", "Automation"],
+    link: "#"
+  }
+];
+
+const stats = [
+  { label: "Focus", value: "Cloud + Automation" },
+  { label: "Stack", value: "AWS - Terraform - Python - Linux" },
+  { label: "Mode", value: "Build -> Ship -> Document" }
+];
+---
+
+<html lang="en">
+  <body class="bg-lines">
+    <header class="container" style="padding:28px 0 0;">
+      <nav style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
+        <a href="/" class="pill"><span class="dot"></span> connerlorenz.dev</a>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+          <a class="pill" href="#projects">Projects</a>
+          <a class="pill" href="#about">About</a>
+          <a class="pill" href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container" style="padding:38px 0 64px;">
+      <!-- HERO -->
+      <section class="card" style="padding:28px; position:relative; overflow:hidden;">
+        <div style="display:flex; flex-direction:column; gap:16px; max-width:760px;">
+          <div class="pill"><span class="dot"></span> Available for Cloud / DevOps / Automation roles</div>
+          <h1>
+            I build reliable systems that <span style="color:var(--text)">don't fall over</span>
+            when traffic spikes.
+          </h1>
+          <p style="font-size:16px;">
+            I'm Conner Lorenz - I ship practical AWS infrastructure, event-driven services, and automation
+            that techs and teams can actually use.
+          </p>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+            <a class="btn primary" href="#projects">View projects -></a>
+            <a class="btn" href="/resume.pdf">Download resume</a>
+            <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+            {stats.map(s => <span class="pill">{s.label}: {s.value}</span>)}
+          </div>
+        </div>
+
+        <!-- subtle diagonal highlight -->
+        <div style="
+          position:absolute; right:-160px; top:-140px;
+          width:520px; height:520px; border-radius:80px;
+          background: radial-gradient(circle at 30% 30%, rgba(124,92,255,.35), transparent 60%),
+                      radial-gradient(circle at 65% 70%, rgba(255,184,107,.22), transparent 60%);
+          transform: rotate(18deg);
+          filter: blur(2px);
+          opacity:.9;
+        "></div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" style="padding:34px 0 8px;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+          <div>
+            <h2>Projects</h2>
+            <p>Real builds, clean writeups, and the "why" behind the choices.</p>
+          </div>
+          <span class="pill">Tip: each card can link to a full case study page</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(12, 1fr); gap:14px; margin-top:16px;">
+          {projects.map(p => (
+            <a class="card" href={p.link} style="grid-column: span 12; padding:18px; transition: transform .15s ease;">
+              <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="max-width:760px;">
+                  <h3 style="font-size:18px; margin-bottom:8px;">{p.title}</h3>
+                  <p style="margin:0;">{p.desc}</p>
+                  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;">
+                    {p.tags.map(t => <span class="pill">{t}</span>)}
+                  </div>
+                </div>
+                <span class="pill">Open -></span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" style="padding:34px 0 8px;">
+        <div class="card" style="padding:22px;">
+          <h2>About</h2>
+          <p>
+            I like automation that's predictable: clear logs, safe defaults, and runbooks that make sense.
+            I'm strongest where cloud + scripting + systems meet - AWS, Terraform, Python, and Linux.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <span class="pill">AWS</span>
+            <span class="pill">Terraform</span>
+            <span class="pill">Python</span>
+            <span class="pill">Linux</span>
+            <span class="pill">Event-driven</span>
+            <span class="pill">Docs + diagrams</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" style="padding:34px 0 80px;">
+        <div class="card" style="padding:22px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:center;">
+          <div>
+            <h2>Contact</h2>
+            <p style="margin:8px 0 0;">If you want someone who can build it and document it, let's talk.</p>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn primary" href="mailto:you@email.com">Email me</a>
+            <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container" style="padding:22px 0 40px; color:var(--muted);">
+      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <span> {new Date().getFullYear()} Conner Lorenz</span>
+        <span class="pill">Built with Astro - Deployed on AWS Amplify</span>
+      </div>
+    </footer>
+  </body>
+</html>
