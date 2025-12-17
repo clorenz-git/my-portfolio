@@ -240,3 +240,10 @@ a.card:hover {
     width: 100%;
   }
 }
+
+/* Mobile fixes for background rendering */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+}
