@@ -5,17 +5,31 @@ const projects = [
   {
     title: "Serverless API Enrichment (EventBridge + Lambda)",
     desc: "Scheduled enrichment job that pulls external API data, normalizes it, and stores clean outputs for downstream use. Built to be modular, observable, and easy to extend.",
-    tags: ["AWS", "Lambda", "EventBridge", "Python", "IaC"],
+    tags: [
+      "AWS", 
+      "Lambda", 
+      "EventBridge", 
+      "Python", 
+      "IaC"
+    ],
     link: "/projects/serverless-api-enrichment",
   },
   {
     title: "AWS Cost Reporter (Terraform + Python)",
     desc: "Daily FinOps automation: analyzes AWS spend, generates a PNG report (matplotlib), stores artifacts in private S3, and emails time-limited pre-signed links via SNS. Built end-to-end with Terraform.",
-    tags: ["AWS", "Terraform", "Lambda", "EventBridge", "S3", "SNS", "Python", "matplotlib"],
+    tags: [
+      "AWS",
+      "Terraform",
+      "Lambda",
+      "EventBridge",
+      "S3",
+      "SNS",
+      "Python",
+      "matplotlib",
+    ],
     link: "/projects/aws-cost-reporter",
   },
 ];
-
 
 const stats = [
   { label: "Focus", value: "Cloud + Automation" },
@@ -56,7 +70,10 @@ const stats = [
 
   <main class="container" style="padding: 38px 0 64px;">
     <!-- HERO -->
-    <section class="card" style="padding: 28px; position: relative; overflow: hidden;">
+    <section
+      class="card"
+      style="padding: 28px; position: relative; overflow: hidden;"
+    >
       <div
         style="
           display: flex;
@@ -76,21 +93,37 @@ const stats = [
 
         <p style="max-width: 680px;">
           I build and automate reliable cloud systems using AWS, Terraform, and
-          event-driven services - focused on repeatability, clarity, and operations
-          that scale.
+          event-driven services - focused on repeatability, clarity, and
+          operations that scale.
         </p>
 
-        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;">
+        <div
+          style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;"
+        >
           <a class="btn primary" href="#projects">View projects</a>
           <a class="btn" href="/resume.pdf">Download resume</a>
-          <a class="btn" href="https://github.com/clorenz-git" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn" href="https://linkedin.com/in/conner-lorenz-737952321" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a
+            class="btn"
+            href="https://github.com/clorenz-git"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+          <a
+            class="btn"
+            href="https://linkedin.com/in/conner-lorenz-737952321"
+            target="_blank"
+            rel="noreferrer"
+            >LinkedIn</a
+          >
         </div>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-          <span class="pill">Focus: Cloud + Automation</span>
-          <span class="pill">Stack: AWS - Terraform - Python - Linux</span>
-          <span class="pill">Mode: Build -> Ship -> Document</span>
+          {stats.map((s) => (
+            <span class="pill">
+              {s.label}: {s.value}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -103,11 +136,19 @@ const stats = [
           height: 520px;
           border-radius: 80px;
           background:
-            radial-gradient(circle at 30% 30%, rgba(96,165,250,.35), transparent 60%),
-            radial-gradient(circle at 65% 70%, rgba(251,146,60,.22), transparent 60%);
+            radial-gradient(
+              circle at 30% 30%,
+              rgba(96, 165, 250, 0.35),
+              transparent 60%
+            ),
+            radial-gradient(
+              circle at 65% 70%,
+              rgba(251, 146, 60, 0.22),
+              transparent 60%
+            );
           transform: rotate(18deg);
           filter: blur(2px);
-          opacity: .9;
+          opacity: 0.9;
         "
       ></div>
     </section>
@@ -140,13 +181,36 @@ const stats = [
         "
       >
         {projects.map((p) => (
-          <a class="card" href={p.link} style="grid-column: span 12; padding: 18px; transition: transform .15s ease;">
-            <div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap;">
+          <a
+            class="card"
+            href={p.link}
+            style="
+              grid-column: span 12;
+              padding: 18px;
+              transition: transform 0.15s ease;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                align-items: flex-start;
+                flex-wrap: wrap;
+              "
+            >
               <div style="max-width: 760px;">
                 <h3 style="font-size: 18px; margin-bottom: 8px;">{p.title}</h3>
                 <p style="margin: 0;">{p.desc}</p>
 
-                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;">
+                <div
+                  style="
+                    display: flex;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                    margin-top: 12px;
+                  "
+                >
                   {p.tags.map((t) => (
                     <span class="pill">{t}</span>
                   ))}
@@ -165,8 +229,9 @@ const stats = [
       <div class="card" style="padding: 22px;">
         <h2>About</h2>
         <p>
-          I like automation that's predictable: clear logs, safe defaults, and runbooks that make sense.
-          I'm strongest where cloud + scripting + systems meet - AWS, Terraform, Python, and Linux.
+          I like automation that's predictable: clear logs, safe defaults, and
+          runbooks that make sense. I'm strongest where cloud + scripting +
+          systems meet - AWS, Terraform, Python, and Linux.
         </p>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -180,7 +245,7 @@ const stats = [
       </div>
     </section>
 
-  
+    <!-- CONTACT -->
     <section id="contact" style="padding: 34px 0 80px;">
       <div
         class="card"
@@ -201,16 +266,42 @@ const stats = [
         </div>
 
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a class="btn primary" href="connerlorenztech@gmail.com">Email me</a>
-          <a class="btn" href="https://github.com/clorenz-git" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn" href="https://linkedin.com/in/conner-lorenz-737952321" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a
+            class="btn primary"
+            href="mailto:connerlorenztech@gmail.com?subject=Hello%20Conner&body=Hi%20Conner%2C%0A%0A"
+          >
+            Email me
+          </a>
+
+          <a
+            class="btn"
+            href="https://github.com/clorenz-git"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+
+          <a
+            class="btn"
+            href="https://linkedin.com/in/conner-lorenz-737952321"
+            target="_blank"
+            rel="noreferrer"
+            >LinkedIn</a
+          >
         </div>
       </div>
     </section>
   </main>
 
   <footer class="container" style="padding: 22px 0 40px; color: var(--muted);">
-    <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      "
+    >
       <span>© {new Date().getFullYear()} Conner Lorenz</span>
       <span class="pill">Built with Astro - Deployed on AWS.</span>
     </div>
