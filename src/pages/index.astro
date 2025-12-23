@@ -3,24 +3,19 @@ import Layout from "../layouts/Layout.astro";
 
 const projects = [
   {
-    title: "Async Event Pipeline (SNS -> SQS)",
-    desc: "Decoupled workflow with retries + DLQ. Built for resiliency and burst traffic.",
-    tags: ["AWS", "SNS", "SQS", "Python"],
-    link: "/projects/async-pipeline",
-  },
-  {
-    title: "Terraform Modular Infra",
-    desc: "Reusable modules for EC2 + SG + EIP with clean outputs and consistent patterns.",
-    tags: ["Terraform", "AWS", "IaC"],
+    title: "Serverless API Enrichment (EventBridge + Lambda)",
+    desc: "Scheduled enrichment job that pulls external API data, normalizes it, and stores clean outputs for downstream use. Built to be modular, observable, and easy to extend.",
+    tags: ["AWS", "Lambda", "EventBridge", "Python", "IaC"],
     link: "/projects/serverless-api-enrichment",
   },
   {
-    title: "Installer Automation",
-    desc: "Packaged installer automation (Python) with file extraction, config injection, service install, and launch.",
-    tags: ["Python", "Windows", "Automation"],
-    link: "/projects/generic-installer",
+    title: "AWS Cost Reporter (Terraform + Python)",
+    desc: "Daily FinOps automation: analyzes AWS spend, generates a PNG report (matplotlib), stores artifacts in private S3, and emails time-limited pre-signed links via SNS. Built end-to-end with Terraform.",
+    tags: ["AWS", "Terraform", "Lambda", "EventBridge", "S3", "SNS", "Python", "matplotlib"],
+    link: "/projects/aws-cost-reporter",
   },
 ];
+
 
 const stats = [
   { label: "Focus", value: "Cloud + Automation" },
