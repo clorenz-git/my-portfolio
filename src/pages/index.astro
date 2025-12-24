@@ -1,17 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import portrait from "../assets/websiteprofilepic.png";
 
 const projects = [
   {
     title: "Serverless API Enrichment (EventBridge + Lambda)",
     desc: "Scheduled enrichment job that pulls external API data, normalizes it, and stores clean outputs for downstream use. Built to be modular, observable, and easy to extend.",
-    tags: [
-      "AWS", 
-      "Lambda", 
-      "EventBridge", 
-      "Python", 
-      "IaC"
-    ],
+    tags: ["AWS", "Lambda", "EventBridge", "Python", "IaC"],
     link: "/projects/serverless-api-enrichment",
   },
   {
@@ -71,59 +66,86 @@ const stats = [
   <main class="container" style="padding: 38px 0 64px;">
     <!-- HERO -->
     <section
-      class="card"
+      class="card hero"
       style="padding: 28px; position: relative; overflow: hidden;"
     >
       <div
         style="
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          max-width: 760px;
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 22px;
+          align-items: center;
         "
       >
-        <div class="pill">
-          <span class="dot"></span>
-          AWS - Terraform - Cloud Automation
-        </div>
-
-        <h1>Cloud Automation & Infrastructure</h1>
-
-        <p style="font-size: 15px; margin-top: 6px;">Conner Lorenz</p>
-
-        <p style="max-width: 680px;">
-          I build and automate reliable cloud systems using AWS, Terraform, and
-          event-driven services - focused on repeatability, clarity, and
-          operations that scale.
-        </p>
-
+        <!-- LEFT: copy -->
         <div
-          style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;"
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 760px;
+          "
         >
-          <a class="btn primary" href="#projects">View projects</a>
-          <a class="btn" href="/resume.pdf">Download resume</a>
-          <a
-            class="btn"
-            href="https://github.com/clorenz-git"
-            target="_blank"
-            rel="noreferrer"
-            >GitHub</a
+          <div class="pill">
+            <span class="dot"></span>
+            AWS - Terraform - Cloud Automation
+          </div>
+
+          <h1>Cloud Automation & Infrastructure</h1>
+
+          <p style="font-size: 15px; margin-top: 6px;">Conner Lorenz</p>
+
+          <p style="max-width: 680px;">
+            I build and automate reliable cloud systems using AWS, Terraform, and
+            event-driven services - focused on repeatability, clarity, and
+            operations that scale.
+          </p>
+
+          <div
+            style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;"
           >
-          <a
-            class="btn"
-            href="https://linkedin.com/in/conner-lorenz-737952321"
-            target="_blank"
-            rel="noreferrer"
-            >LinkedIn</a
-          >
+            <a class="btn primary" href="#projects">View projects</a>
+            <a class="btn" href="/resume.pdf">Download resume</a>
+            <a
+              class="btn"
+              href="https://github.com/clorenz-git"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <a
+              class="btn"
+              href="https://linkedin.com/in/conner-lorenz-737952321"
+              target="_blank"
+              rel="noreferrer"
+              >LinkedIn</a
+            >
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+            {stats.map((s) => (
+              <span class="pill">
+                {s.label}: {s.value}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-          {stats.map((s) => (
-            <span class="pill">
-              {s.label}: {s.value}
-            </span>
-          ))}
+        <!-- RIGHT: portrait -->
+        <div style="display: flex; justify-content: flex-end;">
+          <img
+            src={portrait}
+            alt="Portrait of Conner Lorenz"
+            loading="lazy"
+            style="
+              width: min(320px, 100%);
+              aspect-ratio: 1 / 1;
+              object-fit: cover;
+              border-radius: 18px;
+              border: 1px solid rgba(234, 242, 255, 0.14);
+              box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+            "
+          />
         </div>
       </div>
 
@@ -291,6 +313,15 @@ const stats = [
         </div>
       </div>
     </section>
+
+    <!-- Mobile: stack hero columns -->
+    <style>
+      @media (max-width: 768px) {
+        .hero > div {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
   </main>
 
   <footer class="container" style="padding: 22px 0 40px; color: var(--muted);">
