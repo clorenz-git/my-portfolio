@@ -201,7 +201,6 @@ a.card:hover {
 .hero {
   position: relative;
   isolation: isolate;
-  /* helps keep the glow/filters from doing weird things */
 }
 
 .hero-grid {
@@ -221,7 +220,6 @@ a.card:hover {
   width: min(320px, 100%);
   aspect-ratio: 1 / 1;
 
-  /* Keep the "tech card" look but aim the crop at your face */
   object-fit: cover;
   object-position: 50% 30%;
 
@@ -229,44 +227,6 @@ a.card:hover {
   border: 1px solid rgba(234, 242, 255, 0.14);
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
 }
-
-/* ===== Mobile: layout + readability ===== */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  :root {
-    --gutter: 14px;
-  }
-
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  /* Center portrait so it doesn't look shifted/cropped on mobile */
-  .hero-portrait {
-    justify-content: center;
-  }
-
-  .hero-portrait img {
-    width: min(240px, 70vw);
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  .section-header.bubble h2 {
-    font-size: 30px;
-  }
-
-  .section-header.bubble p {
-    font-size: 16px;
-  }
-}
-
 
 /* Background grid overlay */
 .bg-lines {
@@ -290,7 +250,7 @@ a.card:hover {
   background: rgba(96, 165, 250, 0.35);
 }
 
-/* ===== Mobile: layout + readability ===== */
+/* ===== Mobile: layout + readability (ONLY ONCE) ===== */
 @media (max-width: 768px) {
   body {
     background-attachment: scroll;
@@ -302,14 +262,16 @@ a.card:hover {
 
   .hero-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
+  /* Center portrait on mobile */
   .hero-portrait {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .hero-portrait img {
-    width: 220px;
+    width: min(240px, 70vw);
   }
 
   .btn {
@@ -322,5 +284,10 @@ a.card:hover {
 
   .section-header.bubble p {
     font-size: 16px;
+  }
+
+  /* Small mobile comfort: reduce card padding when you used inline padding:28px on hero */
+  .hero.card {
+    padding: 22px !important;
   }
 }
