@@ -1,121 +1,115 @@
 ---
-import "../../styles/global.css";
+import Layout from "../../layouts/Layout.astro";
 
 const title = "AWS Cost Reporter (Terraform + Python)";
-const github = "https://github.com/clorenz-git/aws-cost-reporter"; // your repo
+const github = "https://github.com/clorenz-git/aws-cost-reporter";
 ---
 
-<html lang="en">
-  <body class="bg-lines">
-    <main class="container" style="padding:42px 0 80px;">
-      <a class="pill" href="/" style="margin-bottom:16px;">&larr; Back</a>
+<Layout title={title}>
+  <main class="container" style="padding:42px 0 80px;">
+    <a class="pill" href="/" style="margin-bottom:16px;">&larr; Back</a>
 
-      <section class="card" style="padding:24px;">
-        <h1 style="margin-bottom:10px;">{title}</h1>
-        <p>
-          A daily FinOps-style automation that pulls AWS spend from Cost
-          Explorer, generates a PNG report (matplotlib), stores artifacts in
-          private S3, and emails a time-limited pre-signed link via SNS. Built
-          end-to-end with Terraform.
-        </p>
+    <section class="card" style="padding:24px;">
+      <h1 style="margin-bottom:10px;">{title}</h1>
+      <p>
+        A daily FinOps-style automation that pulls AWS spend from Cost Explorer,
+        generates a PNG report (matplotlib), stores artifacts in private S3, and
+        emails a time-limited pre-signed link via SNS. Built end-to-end with
+        Terraform.
+      </p>
 
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
-          <span class="pill">AWS</span>
-          <span class="pill">Terraform</span>
-          <span class="pill">Lambda</span>
-          <span class="pill">EventBridge</span>
-          <span class="pill">S3</span>
-          <span class="pill">SNS</span>
-          <span class="pill">Python</span>
-          <span class="pill">matplotlib</span>
-        </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+        <span class="pill">AWS</span>
+        <span class="pill">Terraform</span>
+        <span class="pill">Lambda</span>
+        <span class="pill">EventBridge</span>
+        <span class="pill">S3</span>
+        <span class="pill">SNS</span>
+        <span class="pill">Python</span>
+        <span class="pill">matplotlib</span>
+      </div>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
-          <a class="btn primary" href={github} target="_blank" rel="noreferrer">
-            View code on GitHub
-          </a>
-          <a class="btn" href="#architecture">Architecture</a>
-          <a class="btn" href="#decisions">Decisions</a>
-          <a class="btn" href="#results">Results</a>
-        </div>
-      </section>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <a class="btn primary" href={github} target="_blank" rel="noreferrer">
+          View code on GitHub
+        </a>
+        <a class="btn" href="#architecture">Architecture</a>
+        <a class="btn" href="#decisions">Decisions</a>
+        <a class="btn" href="#results">Results</a>
+      </div>
+    </section>
 
-      <section
-        id="architecture"
-        class="card"
-        style="padding:22px; margin-top:16px;"
+    <section
+      id="architecture"
+      class="card"
+      style="padding:22px; margin-top:16px;"
+    >
+      <h2 style="margin-bottom:10px;">Architecture</h2>
+      <p>
+        EventBridge triggers a scheduled Lambda. The Lambda queries Cost
+        Explorer, generates JSON + a PNG chart, uploads both to a private S3
+        reports bucket, and publishes an SNS notification email containing
+        time-limited pre-signed URLs.
+      </p>
+
+      <div
+        style="display:grid; gap:10px; margin-top:14px; color:var(--muted); line-height:1.7;"
       >
-        <h2 style="margin-bottom:10px;">Architecture</h2>
-        <p>
-          EventBridge triggers a scheduled Lambda. The Lambda queries Cost
-          Explorer, generates JSON + a PNG chart, uploads both to a private S3
-          reports bucket, and publishes an SNS notification email containing
-          time-limited pre-signed URLs.
-        </p>
-
-        <div
-          style="display:grid; gap:10px; margin-top:14px; color:var(--muted); line-height:1.7;"
-        >
-          <div><strong>Schedule:</strong> EventBridge (daily)</div>
-          <div><strong>Compute:</strong> Lambda (Python)</div>
-          <div><strong>Data source:</strong> AWS Cost Explorer</div>
-          <div><strong>Storage:</strong> S3 (private + encrypted)</div>
-          <div>
-            <strong>Notification:</strong> SNS Email (confirmed subscription)
-          </div>
-          <div>
-            <strong>Access model:</strong> Pre-signed URLs (temporary access)
-          </div>
+        <div><strong>Schedule:</strong> EventBridge (daily)</div>
+        <div><strong>Compute:</strong> Lambda (Python)</div>
+        <div><strong>Data source:</strong> AWS Cost Explorer</div>
+        <div><strong>Storage:</strong> S3 (private + encrypted)</div>
+        <div>
+          <strong>Notification:</strong> SNS Email (confirmed subscription)
         </div>
-
-        <div class="pill" style="margin-top:12px;">
-          Tip: drop your PNG/SVG diagram into <code>/public</code> and embed it here
-          later.
+        <div>
+          <strong>Access model:</strong> Pre-signed URLs (temporary access)
         </div>
-      </section>
+      </div>
 
-      <section
-        id="decisions"
-        class="card"
-        style="padding:22px; margin-top:16px;"
+      <div class="pill" style="margin-top:12px;">
+        Tip: drop your PNG/SVG diagram into <code>/public</code> and embed it here
+        later.
+      </div>
+    </section>
+
+    <section id="decisions" class="card" style="padding:22px; margin-top:16px;">
+      <h2 style="margin-bottom:10px;">Key decisions</h2>
+      <ul
+        style="color:var(--muted); line-height:1.7; margin:0; padding-left:18px;"
       >
-        <h2 style="margin-bottom:10px;">Key decisions</h2>
-        <ul
-          style="color:var(--muted); line-height:1.7; margin:0; padding-left:18px;"
-        >
-          <li>
-            <strong>Terraform-first</strong> so the full system can be deployed and
-            torn down quickly.
-          </li>
-          <li>
-            <strong>Lambda Layer for matplotlib/numpy</strong> (built via container)
-            to keep the function package lean and runtime-compatible.
-          </li>
-          <li>
-            <strong>Private-by-default reports</strong> shared via time-limited pre-signed
-            URLs instead of opening up access.
-          </li>
-          <li>
-            <strong>Separate artifacts vs reports</strong> (layer zip lives in an
-            artifacts bucket; outputs live in the reports bucket).
-          </li>
-        </ul>
-      </section>
+        <li>
+          <strong>Terraform-first</strong> so the full system can be deployed and
+          torn down quickly.
+        </li>
+        <li>
+          <strong>Lambda Layer for matplotlib/numpy</strong> (built via container)
+          to keep the function package lean and runtime-compatible.
+        </li>
+        <li>
+          <strong>Private-by-default reports</strong> shared via time-limited pre-signed
+          URLs instead of opening up access.
+        </li>
+        <li>
+          <strong>Separate artifacts vs reports</strong> (layer zip lives in an artifacts
+          bucket; outputs live in the reports bucket).
+        </li>
+      </ul>
+    </section>
 
-      <section id="results" class="card" style="padding:22px; margin-top:16px;">
-        <h2 style="margin-bottom:10px;">Results</h2>
-        <ul
-          style="color:var(--muted); line-height:1.7; margin:0; padding-left:18px;"
-        >
-          <li>Daily automated cost report with JSON + PNG output.</li>
-          <li>Secure distribution model using pre-signed links.</li>
-          <li>Clean “apply/destroy” lifecycle with Terraform.</li>
-          <li>
-            Clear upgrade path: PDF reports + SES HTML notifications, smarter
-            alert thresholds, tighter IAM scope.
-          </li>
-        </ul>
-      </section>
-    </main>
-  </body>
-</html>
+    <section id="results" class="card" style="padding:22px; margin-top:16px;">
+      <h2 style="margin-bottom:10px;">Results</h2>
+      <ul
+        style="color:var(--muted); line-height:1.7; margin:0; padding-left:18px;"
+      >
+        <li>Daily automated cost report with JSON + PNG output.</li>
+        <li>Secure distribution model using pre-signed links.</li>
+        <li>Clean “apply/destroy” lifecycle with Terraform.</li>
+        <li>
+          Clear upgrade path: PDF reports + SES HTML notifications, smarter
+          alert thresholds, tighter IAM scope.
+        </li>
+      </ul>
+    </section>
+  </main>
+</Layout>

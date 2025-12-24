@@ -1,89 +1,86 @@
 ---
-import "../../styles/global.css";
+import Layout from "../../layouts/Layout.astro";
 
 const title = "Serverless Enrichment API";
 const github = "https://github.com/clorenz-git/serverless-enrichment-api";
 ---
 
-<html lang="en">
-  <body class="bg-lines">
-    <main class="container" style="padding:42px 0 80px;">
-      <a class="pill" href="/" style="margin-bottom:16px;">&larr; Back</a>
+<Layout title={title}>
+  <main class="container" style="padding:42px 0 80px;">
+    <a class="pill" href="/" style="margin-bottom:16px;">&larr; Back</a>
 
-      <section class="card" style="padding:24px;">
-        <h1>{title}</h1>
-        <p>
-          A production-style serverless API built with FastAPI and deployed to
-          AWS Lambda as a container image behind API Gateway. Infrastructure is
-          managed entirely with Terraform to mirror real-world cloud workflows.
-        </p>
+    <section class="card" style="padding:24px;">
+      <h1>{title}</h1>
+      <p>
+        A production-style serverless API built with FastAPI and deployed to AWS
+        Lambda as a container image behind API Gateway. Infrastructure is
+        managed entirely with Terraform to mirror real-world cloud workflows.
+      </p>
 
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
-          <span class="pill">AWS</span>
-          <span class="pill">Lambda</span>
-          <span class="pill">API Gateway</span>
-          <span class="pill">Terraform</span>
-          <span class="pill">FastAPI</span>
-          <span class="pill">Docker</span>
-        </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+        <span class="pill">AWS</span>
+        <span class="pill">Lambda</span>
+        <span class="pill">API Gateway</span>
+        <span class="pill">Terraform</span>
+        <span class="pill">FastAPI</span>
+        <span class="pill">Docker</span>
+      </div>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
-          <a class="btn primary" href={github} target="_blank" rel="noreferrer">
-            View code on GitHub
-          </a>
-        </div>
-      </section>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <a class="btn primary" href={github} target="_blank" rel="noreferrer">
+          View code on GitHub
+        </a>
+      </div>
+    </section>
 
-      <section class="card" style="padding:22px; margin-top:16px;">
-        <h2>Problem</h2>
-        <p>
-          I wanted to understand how containerized applications actually run in
-          a serverless AWS environment — beyond console demos and zip-based
-          Lambda functions. Many examples stop short of showing how services are
-          wired together in practice.
-        </p>
-      </section>
+    <section class="card" style="padding:22px; margin-top:16px;">
+      <h2>Problem</h2>
+      <p>
+        I wanted to understand how containerized applications actually run in a
+        serverless AWS environment — beyond console demos and zip-based Lambda
+        functions. Many examples stop short of showing how services are wired
+        together in practice.
+      </p>
+    </section>
 
-      <section class="card" style="padding:22px; margin-top:16px;">
-        <h2>Approach</h2>
-        <ul style="color:var(--muted); line-height:1.7;">
-          <li>
-            Build a small but realistic FastAPI service with clear
-            request/response behavior.
-          </li>
-          <li>
-            Package the application as a Docker image and push it to Amazon ECR.
-          </li>
-          <li>Deploy the image to AWS Lambda using container support.</li>
-          <li>Expose the service via API Gateway using proxy routing.</li>
-          <li>
-            Rebuild the entire setup using Terraform after validating it
-            manually.
-          </li>
-        </ul>
-      </section>
+    <section class="card" style="padding:22px; margin-top:16px;">
+      <h2>Approach</h2>
+      <ul style="color:var(--muted); line-height:1.7;">
+        <li>
+          Build a small but realistic FastAPI service with clear
+          request/response behavior.
+        </li>
+        <li>
+          Package the application as a Docker image and push it to Amazon ECR.
+        </li>
+        <li>Deploy the image to AWS Lambda using container support.</li>
+        <li>Expose the service via API Gateway using proxy routing.</li>
+        <li>
+          Rebuild the entire setup using Terraform after validating it manually.
+        </li>
+      </ul>
+    </section>
 
-      <section class="card" style="padding:22px; margin-top:16px;">
-        <h2>Key Decisions</h2>
-        <ul style="color:var(--muted); line-height:1.7;">
-          <li>Use Lambda container images instead of zip-based deployments.</li>
-          <li>Keep API Gateway thin and let FastAPI handle all routing.</li>
-          <li>Manage IAM, Lambda, and API Gateway entirely with Terraform.</li>
-          <li>Add a version endpoint to expose deploy metadata and git SHA.</li>
-        </ul>
-      </section>
+    <section class="card" style="padding:22px; margin-top:16px;">
+      <h2>Key Decisions</h2>
+      <ul style="color:var(--muted); line-height:1.7;">
+        <li>Use Lambda container images instead of zip-based deployments.</li>
+        <li>Keep API Gateway thin and let FastAPI handle all routing.</li>
+        <li>Manage IAM, Lambda, and API Gateway entirely with Terraform.</li>
+        <li>Add a version endpoint to expose deploy metadata and git SHA.</li>
+      </ul>
+    </section>
 
-      <section class="card" style="padding:22px; margin-top:16px;">
-        <h2>Results</h2>
-        <ul style="color:var(--muted); line-height:1.7;">
-          <li>
-            Fully working serverless API deployed via Infrastructure as Code.
-          </li>
-          <li>Clear understanding of region alignment between AWS services.</li>
-          <li>Reusable Terraform patterns for future serverless projects.</li>
-          <li>Improved confidence debugging real cloud deployment issues.</li>
-        </ul>
-      </section>
-    </main>
-  </body>
-</html>
+    <section class="card" style="padding:22px; margin-top:16px;">
+      <h2>Results</h2>
+      <ul style="color:var(--muted); line-height:1.7;">
+        <li>
+          Fully working serverless API deployed via Infrastructure as Code.
+        </li>
+        <li>Clear understanding of region alignment between AWS services.</li>
+        <li>Reusable Terraform patterns for future serverless projects.</li>
+        <li>Improved confidence debugging real cloud deployment issues.</li>
+      </ul>
+    </section>
+  </main>
+</Layout>
