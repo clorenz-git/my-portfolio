@@ -67,15 +67,7 @@ const stats = [
   <main class="container" style="padding: 38px 0 64px;">
     <!-- HERO -->
     <section class="card hero" style="padding: 28px; position: relative; overflow: hidden;">
-      <div
-        class="hero-grid"
-        style="
-          display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
-          gap: 22px;
-          align-items: center;
-        "
-      >
+      <div class="hero-grid">
         <!-- LEFT: copy -->
         <div
           style="
@@ -136,7 +128,9 @@ const stats = [
       </div>
 
       <div
+        aria-hidden="true"
         style="
+          pointer-events: none;
           position: absolute;
           right: -160px;
           top: -140px;

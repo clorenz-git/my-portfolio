@@ -200,6 +200,8 @@ a.card:hover {
 /* ===== Hero portrait support ===== */
 .hero {
   position: relative;
+  isolation: isolate;
+  /* helps keep the glow/filters from doing weird things */
 }
 
 .hero-grid {
@@ -212,15 +214,57 @@ a.card:hover {
 .hero-portrait {
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 }
 
 .hero-portrait img {
   width: min(320px, 100%);
   aspect-ratio: 1 / 1;
+
+  /* Keep the "tech card" look but aim the crop at your face */
   object-fit: cover;
+  object-position: 50% 30%;
+
   border-radius: 18px;
   border: 1px solid rgba(234, 242, 255, 0.14);
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+}
+
+/* ===== Mobile: layout + readability ===== */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  :root {
+    --gutter: 14px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Center portrait so it doesn't look shifted/cropped on mobile */
+  .hero-portrait {
+    justify-content: center;
+  }
+
+  .hero-portrait img {
+    width: min(240px, 70vw);
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .section-header.bubble h2 {
+    font-size: 30px;
+  }
+
+  .section-header.bubble p {
+    font-size: 16px;
+  }
 }
 
 
