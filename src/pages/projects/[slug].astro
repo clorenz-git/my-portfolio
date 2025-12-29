@@ -1,0 +1,70 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const entries = await getCollection("projects");
+    return entries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { title, summary, github, tags, diagram } = entry.data;
+const { Content } = await entry.render();
+---
+
+<Layout title={title}>
+    <main class="container" style="padding:42px 0 80px;">
+        <a class="pill" href="/" style="margin-bottom:16px;">&larr; Back</a>
+
+        <section class="card" style="padding:24px;">
+            <h1>{title}</h1>
+            <p>{summary}</p>
+
+            {
+                tags?.length ? (
+                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+                        {tags.map((t) => (
+                            <span class="pill">{t}</span>
+                        ))}
+                    </div>
+                ) : null
+            }
+
+            {
+                github ? (
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+                        <a
+                            class="btn primary"
+                            href={github}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            View code on GitHub
+                        </a>
+                    </div>
+                ) : null
+            }
+        </section>
+
+        {
+            diagram ? (
+                <section class="card" style="padding:22px; margin-top:16px;">
+                    <h2>Architecture</h2>
+                    <img
+                        src={diagram}
+                        alt={`${title} architecture`}
+                        style="width:100%; border-radius:12px; display:block;"
+                        loading="lazy"
+                    />
+                </section>
+            ) : null
+        }
+
+        <section class="card" style="padding:22px; margin-top:16px;">
+            <Content />
+        </section>
+    </main>
+</Layout>

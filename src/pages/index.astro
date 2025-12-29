@@ -1,44 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
 import portrait from "../assets/websiteprofilepic.png";
-
-const projects = [
-  {
-    title: "Serverless API Enrichment (EventBridge + Lambda)",
-    desc: "Scheduled enrichment job that pulls external API data, normalizes it, and stores clean outputs for downstream use. Built to be modular, observable, and easy to extend.",
-    tags: ["AWS", "Lambda", "EventBridge", "Python", "IaC"],
-    link: "/projects/serverless-api-enrichment",
-  },
-  {
-    title: "AWS Cost Reporter (Terraform + Python)",
-    desc: "Daily FinOps automation: analyzes AWS spend, generates a PNG report (matplotlib), stores artifacts in private S3, and emails time-limited pre-signed links via SNS. Built end-to-end with Terraform.",
-    tags: [
-      "AWS",
-      "Terraform",
-      "Lambda",
-      "EventBridge",
-      "S3",
-      "SNS",
-      "Python",
-      "matplotlib",
-    ],
-    link: "/projects/aws-cost-reporter",
-  },
-  {
-  title: "Terraform HA Blue/Green Web Tier",
-  desc: "High availability web tier on AWS using Terraform with blue/green deployments, ALB weighted routing, Auto Scaling Groups, and SSM-only access.",
-  tags: ["AWS", "Terraform", "ALB", "Auto Scaling", "SSM", "EC2"],
-  link: "/projects/terraform-ha-bluegreen",
-},
-
-];
 
 const stats = [
   { label: "Focus", value: "Cloud + Automation" },
   { label: "Stack", value: "AWS - Terraform - Python - Linux" },
   { label: "Mode", value: "Build -> Ship -> Document" },
 ];
+
+// Pull projects from content collection
+const projects = await getCollection("projects");
+
+// Newest first (if date is provided)
+projects.sort((a, b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
 ---
 
 <Layout title="Conner Lorenz">
@@ -73,7 +50,10 @@ const stats = [
 
   <main class="container" style="padding: 38px 0 64px;">
     <!-- HERO -->
-    <section class="card hero" style="padding: 28px; position: relative; overflow: hidden;">
+    <section
+      class="card hero"
+      style="padding: 28px; position: relative; overflow: hidden;"
+    >
       <div class="hero-grid">
         <!-- LEFT: copy -->
         <div
@@ -94,23 +74,34 @@ const stats = [
           <p style="font-size: 15px; margin-top: 6px;">Conner Lorenz</p>
 
           <p style="max-width: 680px;">
-            I build and automate reliable cloud systems using AWS, Terraform, and
-            event-driven services - focused on repeatability, clarity, and operations
-            that scale.
+            I build and automate reliable cloud systems using AWS, Terraform,
+            and event-driven services - focused on repeatability, clarity, and
+            operations that scale.
           </p>
 
-          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;">
+          <div
+            style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;"
+          >
             <a class="btn primary" href="#projects">View projects</a>
+
             <a
-                href="/Conner_Lorenz_Resume.pdf"
-                class="pill"
-                target="_blank"
-                rel="noopener"
+              href="/Conner_Lorenz_Resume.pdf"
+              class="pill"
+              target="_blank"
+              rel="noopener"
             >
               Resume
             </a>
 
-            <a class="btn" href="https://github.com/clorenz-git" target="_blank" rel="noreferrer">GitHub</a>
+            <a
+              class="btn"
+              href="https://github.com/clorenz-git"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+
             <a
               class="btn"
               href="https://linkedin.com/in/conner-lorenz-737952321"
@@ -121,12 +112,16 @@ const stats = [
             </a>
           </div>
 
-          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-            {stats.map((s) => (
-              <span class="pill">
-                {s.label}: {s.value}
-              </span>
-            ))}
+          <div
+            style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;"
+          >
+            {
+              stats.map((s) => (
+                <span class="pill">
+                  {s.label}: {s.value}
+                </span>
+              ))
+            }
           </div>
         </div>
 
@@ -159,70 +154,55 @@ const stats = [
           filter: blur(2px);
           opacity: 0.9;
         "
-      ></div>
+      >
+      </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" style="padding: 34px 0 8px;">
-      <div
-        style="
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          gap: 16px;
-          flex-wrap: wrap;
-        "
-      >
-        <div class="section-header bubble">
-          <h2>Projects</h2>
-          <p>Real builds, clean writeups, and the "why" behind the choices.</p>
-        </div>
+      <div class="card" style="padding: 22px;">
+        <h2>Projects</h2>
+        <p style="color: var(--muted); margin-top: 8px;">
+          Real builds in AWS, Terraform, Python, and Linux — focused on
+          repeatability, operations, and clean documentation.
+        </p>
 
-        <span class="pill">Tip: each card can link to a full case study page</span>
-      </div>
-
-      <div
-        style="
-          display: grid;
-          grid-template-columns: repeat(12, 1fr);
-          gap: 14px;
-          margin-top: 16px;
-        "
-      >
-        {projects.map((p) => (
-          <a
-            class="card"
-            href={p.link}
-            style="
-              grid-column: span 12;
-              padding: 18px;
-              transition: transform 0.15s ease;
-            "
-          >
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                gap: 12px;
-                align-items: flex-start;
-                flex-wrap: wrap;
+        <div style="display: grid; gap: 14px; margin-top: 14px;">
+          {
+            projects.map((p) => (
+              <a
+                class="card"
+                href={`/projects/${p.slug}`}
+                style="
+                display: block;
+                text-decoration: none;
+                padding: 18px;
               "
-            >
-              <div style="max-width: 760px;">
-                <h3 style="font-size: 18px; margin-bottom: 8px;">{p.title}</h3>
-                <p style="margin: 0;">{p.desc}</p>
-
-                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;">
-                  {p.tags.map((t) => (
-                    <span class="pill">{t}</span>
-                  ))}
+              >
+                <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                  <h3 style="margin: 0;">{p.data.title}</h3>
+                  {p.data.date ? (
+                    <span class="pill" style="opacity: 0.9;">
+                      {p.data.date}
+                    </span>
+                  ) : null}
                 </div>
-              </div>
 
-              <span class="pill">Open -></span>
-            </div>
-          </a>
-        ))}
+                <p style="margin: 10px 0 0; color: var(--muted); line-height: 1.6;">
+                  {p.data.summary}
+                </p>
+
+                {p.data.tags?.length ? (
+                  <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px;">
+                    {p.data.tags.slice(0, 8).map((t) => (
+                      <span class="pill">{t}</span>
+                    ))}
+                  </div>
+                ) : null}
+              </a>
+            ))
+          }
+        </div>
       </div>
     </section>
 
@@ -231,8 +211,9 @@ const stats = [
       <div class="card" style="padding: 22px;">
         <h2>About</h2>
         <p>
-          I like automation that's predictable: clear logs, safe defaults, and runbooks that make sense.
-          I'm strongest where cloud + scripting + systems meet - AWS, Terraform, Python, and Linux.
+          I like automation that's predictable: clear logs, safe defaults, and
+          runbooks that make sense. I'm strongest where cloud + scripting +
+          systems meet - AWS, Terraform, Python, and Linux.
         </p>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -274,7 +255,14 @@ const stats = [
             Email me
           </a>
 
-          <a class="btn" href="https://github.com/clorenz-git" target="_blank" rel="noreferrer">GitHub</a>
+          <a
+            class="btn"
+            href="https://github.com/clorenz-git"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
 
           <a
             class="btn"
@@ -290,7 +278,9 @@ const stats = [
   </main>
 
   <footer class="container" style="padding: 22px 0 40px; color: var(--muted);">
-    <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+    <div
+      style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;"
+    >
       <span>© {new Date().getFullYear()} Conner Lorenz</span>
       <span class="pill">Built with Astro - Deployed on AWS.</span>
     </div>
