@@ -1,25 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import architectureDiagram from "../../assets/aws-bluegreen-architecture.png";
 
 const title = "Terraform HA Blue/Green Web Tier (SSM-Only)";
 const github = "https://github.com/clorenz-git/terraform-ha-bluegreen";
 ---
-
-<section class="card" style="padding:22px; margin-top:16px;">
-    <h2>Architecture</h2>
-
-    <img
-        src="/public/aws-bluegreen-architecture.png"
-        alt="Terraform blue/green high availability architecture"
-        style="width:100%; border-radius:12px;"
-    />
-
-    <p style="margin-top:12px; color:var(--muted);">
-        High availability web tier using an Application Load Balancer with
-        weighted target groups, blue/green Auto Scaling Groups in private
-        subnets, and SSM-only management access.
-    </p>
-</section>
 
 <Layout title={title}>
     <main class="container" style="padding:42px 0 80px;">
@@ -60,6 +45,23 @@ const github = "https://github.com/clorenz-git/terraform-ha-bluegreen";
                     View code on GitHub
                 </a>
             </div>
+        </section>
+
+        <section class="card" style="padding:22px; margin-top:16px;">
+            <h2>Architecture</h2>
+
+            <img
+                src={architectureDiagram}
+                alt="Terraform blue/green high availability architecture"
+                style="width:100%; border-radius:12px; display:block;"
+                loading="lazy"
+            />
+
+            <p style="margin-top:12px; color:var(--muted);">
+                High availability web tier using an Application Load Balancer
+                with weighted target groups, blue/green Auto Scaling Groups in
+                private subnets, and SSM-only management access.
+            </p>
         </section>
 
         <section class="card" style="padding:22px; margin-top:16px;">
