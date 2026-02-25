@@ -6,9 +6,9 @@ import { getCollection } from "astro:content";
 import portrait from "../assets/websiteprofilepic.png";
 
 const stats = [
-  { label: "Focus", value: "Cloud + Automation" },
-  { label: "Stack", value: "AWS - Terraform - Python - Linux" },
-  { label: "Mode", value: "Build -> Ship -> Document" },
+  { label: "Target", value: "Cloud Support Engineer" },
+  { label: "Strengths", value: "Troubleshooting • Linux • Networking" },
+  { label: "Tools", value: "AWS • Terraform • Python • Bash • Git" },
 ];
 
 // Pull projects from content collection
@@ -66,17 +66,18 @@ projects.sort((a, b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
         >
           <div class="pill">
             <span class="dot"></span>
-            AWS - Terraform - Cloud Automation
+            AWS Certified • Cloud Support • Linux • Automation
           </div>
 
-          <h1>Cloud Automation & Infrastructure</h1>
+          <h1>Cloud Support Engineer</h1>
 
           <p style="font-size: 15px; margin-top: 6px;">Conner Lorenz</p>
 
           <p style="max-width: 680px;">
-            I build and automate reliable cloud systems using AWS, Terraform,
-            and event-driven services - focused on repeatability, clarity, and
-            operations that scale.
+            I troubleshoot customer-impacting issues in cloud-hosted systems —
+            digging into logs, APIs, Linux, and networking to find root cause
+            fast. I also automate repeatable fixes with Python/Bash and build
+            clean infrastructure with Terraform on AWS.
           </p>
 
           <div
@@ -163,8 +164,9 @@ projects.sort((a, b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
       <div class="card" style="padding: 22px;">
         <h2>Projects</h2>
         <p style="color: var(--muted); margin-top: 8px;">
-          Real builds in AWS, Terraform, Python, and Linux — focused on
-          repeatability, operations, and clean documentation.
+          Hands-on projects that mirror Cloud Support work: monitoring/alerting,
+          incident-style troubleshooting, infrastructure baselines, and
+          automation that makes fixes repeatable.
         </p>
 
         <div style="display: grid; gap: 14px; margin-top: 14px;">
@@ -211,18 +213,24 @@ projects.sort((a, b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
       <div class="card" style="padding: 22px;">
         <h2>About</h2>
         <p>
-          I like automation that's predictable: clear logs, safe defaults, and
-          runbooks that make sense. I'm strongest where cloud + scripting +
-          systems meet - AWS, Terraform, Python, and Linux.
+          I'm at my best in the “investigate → reproduce → fix → document” loop.
+          I enjoy chasing down production issues, writing clear runbooks, and
+          building small automations that remove toil. My core stack is AWS +
+          Linux + networking, with Terraform, Python, and Bash for repeatable
+          infrastructure and support tooling.
         </p>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <span class="pill">AWS</span>
+          <span class="pill">Linux</span>
+          <span class="pill">Troubleshooting</span>
+          <span class="pill">Networking (DNS/TCP/IP)</span>
+          <span class="pill">Logs + Monitoring</span>
+          <span class="pill">REST APIs</span>
           <span class="pill">Terraform</span>
           <span class="pill">Python</span>
-          <span class="pill">Linux</span>
-          <span class="pill">Event-driven</span>
-          <span class="pill">Docs + diagrams</span>
+          <span class="pill">Bash</span>
+          <span class="pill">Runbooks</span>
         </div>
       </div>
     </section>
@@ -243,7 +251,8 @@ projects.sort((a, b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
         <div>
           <h2>Contact</h2>
           <p style="margin: 8px 0 0;">
-            If you want someone who can build it and document it, let's talk.
+            If you need someone who can troubleshoot issues, write clean
+            runbooks, and automate repeatable fixes — let's talk.
           </p>
         </div>
 
@@ -282,7 +291,9 @@ projects.sort((a, b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
       style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;"
     >
       <span>© {new Date().getFullYear()} Conner Lorenz</span>
-      <span class="pill">Built with Astro - Deployed on AWS.</span>
+      <span class="pill"
+        >Astro Portfolio • Deployed on AWS • Built with observability in mind</span
+      >
     </div>
   </footer>
 </Layout>
